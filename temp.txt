@@ -1,0 +1,30 @@
+cyber-feed-dashboard/
+├── .github/workflows/
+│   └── refresh-feeds.yml        # cron: fetch, build, deploy to Pages
+├── config/
+│   └── feeds.json               # all sources, categories, URLs (edit this to add or remove feeds)
+├── scripts/
+│   ├── fetch-feeds.js           # entry point: reads config, fetches, writes site/data/
+│   └── lib/
+│       ├── http.js              # fetch with timeout, retry, User-Agent
+│       ├── parse-feed.js        # RSS and Atom into one common item shape
+│       ├── sanitize.js          # strip HTML, truncate excerpts
+│       ├── dedupe.js            # cross-feed duplicate removal
+│       └── vuln.js              # CVE extraction, CISA KEV, NVD, EPSS enrichment
+├── site/                        # exactly what gets deployed
+│   ├── index.html
+│   ├── css/styles.css
+│   ├── js/
+│   │   ├── app.js               # startup and state
+│   │   ├── render.js            # builds the DOM safely (textContent, never innerHTML)
+│   │   ├── filters.js           # tabs, search, source filter
+│   │   └── storage.js           # theme, bookmarks, watchlist (localStorage)
+│   └── data/                    # generated, not hand-edited
+│       ├── feeds.json           # merged items + per-feed status + last updated
+│       └── merged.xml           # optional merged RSS output
+├── package.json
+├── eslint.config.js
+├── .prettierrc
+├── .gitignore
+└── README.md                    # setup, deploy, limitations
+

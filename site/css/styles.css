@@ -1,0 +1,324 @@
+/* ---------- Theme tokens ---------- */
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface-2: #1c232d;
+  --border: #2a323d;
+  --text: #e6edf3;
+  --text-muted: #9aa7b4;
+  --link: #6cb6ff;
+  --focus: #f2cc60;
+  --accent: #3fb950;
+
+  --cat-news: #58a6ff;
+  --cat-vulnerabilities: #ff7b72;
+  --cat-advisories: #f2cc60;
+  --cat-threat-hunting: #bc8cff;
+
+  --warn-bg: #3a2a0a;
+  --warn-text: #f2cc60;
+
+  --radius: 8px;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  color-scheme: dark;
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f8fa;
+  --surface: #ffffff;
+  --surface-2: #eef1f5;
+  --border: #d0d7de;
+  --text: #1f2328;
+  --text-muted: #59636e;
+  --link: #0550ae;
+  --focus: #9a6700;
+  --accent: #1a7f37;
+
+  --cat-news: #0969da;
+  --cat-vulnerabilities: #cf222e;
+  --cat-advisories: #9a6700;
+  --cat-threat-hunting: #8250df;
+
+  --warn-bg: #fff8c5;
+  --warn-text: #7d4e00;
+  color-scheme: light;
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+a {
+  color: var(--link);
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: 8px;
+  top: -48px;
+  z-index: 100;
+  padding: 8px 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.skip-link:focus {
+  top: 8px;
+}
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+}
+
+.updated {
+  margin: 0;
+  margin-left: auto;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.icon-button {
+  padding: 6px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.icon-button:hover {
+  border-color: var(--text-muted);
+}
+
+/* ---------- Layout ---------- */
+main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.warnings {
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  background: var(--warn-bg);
+  color: var(--warn-text);
+  border: 1px solid var(--warn-text);
+  border-radius: var(--radius);
+  font-size: 0.9rem;
+}
+.warnings[hidden] {
+  display: none;
+}
+
+/* ---------- Controls ---------- */
+.controls {
+  margin-bottom: 12px;
+}
+
+.tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: none;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+}
+.tab:hover {
+  color: var(--text);
+}
+.tab[aria-selected="true"] {
+  color: var(--text);
+  border-bottom-color: var(--tab-color, var(--accent));
+}
+.tab .count {
+  margin-left: 6px;
+  padding: 1px 7px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border-radius: 999px;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px 10px;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.filters input[type="search"] {
+  flex: 1 1 260px;
+  min-width: 0;
+}
+.filters select {
+  flex: 0 1 220px;
+}
+
+.result-count {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Items ---------- */
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.items:focus {
+  outline: none;
+}
+
+.item {
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--item-color, var(--border));
+  border-radius: var(--radius);
+}
+.item[data-category="news"] { --item-color: var(--cat-news); }
+.item[data-category="vulnerabilities"] { --item-color: var(--cat-vulnerabilities); }
+.item[data-category="advisories"] { --item-color: var(--cat-advisories); }
+.item[data-category="threat-hunting"] { --item-color: var(--cat-threat-hunting); }
+
+.item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.item-source {
+  font-weight: 700;
+  color: var(--item-color, var(--text-muted));
+}
+
+.item-title {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.item-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+.item-title a:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+
+.item-summary {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.item-also {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.empty {
+  padding: 32px 12px;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 16px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 600px) {
+  body { font-size: 14px; }
+  .topbar { gap: 8px; padding: 8px 12px; }
+  main { padding: 12px; }
+  .updated { font-size: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; scroll-behavior: auto !important; }
+}

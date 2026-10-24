@@ -1,0 +1,89 @@
+# Project Context: Cybersecurity RSS Dashboard
+
+## Goal
+Build a web page that aggregates cybersecurity RSS/Atom feeds into one clean,
+fast, readable dashboard covering:
+1. Cybersecurity news
+2. Newly released vulnerabilities (CVEs)
+3. Official advisories (vendor/government)
+4. Threat hunting / threat intel / DFIR write-ups
+
+Audience: [me / my SOC team / public readers]  <-- CONFIRM
+Current date reference: October 22, 2026
+
+## Tech approach (CONFIRM or change)
+- Stack: [vanilla HTML/CSS/JS single file | React + Vite | Next.js | Python backend]
+- Browsers can't fetch most RSS feeds directly because of CORS. Choose one:
+  A. Build-time/cron fetch: a script pulls feeds, writes feeds.json, and the page
+     reads that (recommended: simple, fast, static-host friendly)
+  B. Small serverless proxy (Cloudflare Worker / Vercel function) fetching live
+  C. Backend server (Node/Python) with caching
+- Hosting target: [GitHub Pages + Actions cron | Cloudflare | Vercel | self-hosted]
+- Refresh interval: every 15-30 min; cache results; respect each feed's rate limits
+
+## Feed sources (starter list, verify each URL still works)
+News:
+- BleepingComputer: https://www.bleepingcomputer.com/feed/
+- The Hacker News: https://feeds.feedburner.com/TheHackersNews
+- Krebs on Security: https://krebsonsecurity.com/feed/
+- SecurityWeek: https://feeds.feedburner.com/securityweek
+- Dark Reading: https://www.darkreading.com/rss.xml
+
+Vulnerabilities:
+- NVD CVE API 2.0: https://services.nvd.nist.gov/rest/json/cves/2.0 (JSON, not RSS)
+- CISA Known Exploited Vulnerabilities (JSON):
+  https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
+- Exploit-DB: https://www.exploit-db.com/rss.xml
+- Optional enrichment: FIRST EPSS API (exploit probability), CVSS from NVD
+
+Advisories:
+- CISA advisories: https://www.cisa.gov/cybersecurity-advisories/all.xml
+- Microsoft Security blog / MSRC, Cisco, Fortinet, Palo Alto, Ivanti, Citrix PSIRTs
+  (find their official feeds)
+- SANS ISC: https://isc.sans.edu/rssfeed.xml
+
+Threat hunting / threat intel / DFIR:
+- The DFIR Report: https://thedfirreport.com/feed/
+- Cisco Talos: https://blog.talosintelligence.com/rss/
+- Unit 42: https://unit42.paloaltonetworks.com/feed/
+- Securelist (Kaspersky): https://securelist.com/feed/
+- Google Project Zero: https://googleprojectzero.blogspot.com/feeds/posts/default
+- Google Threat Intelligence / Mandiant blog, Microsoft Security blog
+
+## Features
+Must have:
+- Tabs/filters by category: News | Vulnerabilities | Advisories | Threat Hunting
+- Each item shows: title, source, published date (relative + absolute), short
+  summary (truncated, HTML stripped), link opening the original in a new tab
+- Sorted newest first, with duplicate removal across feeds
+- Search box + source filter
+- Light/dark mode, responsive layout (mobile friendly)
+- Graceful handling of failed feeds (show a warning, keep the rest working)
+- "Last updated" timestamp
+
+Nice to have:
+- Auto-extract CVE IDs from text and link to NVD
+- Badge CVEs listed in CISA KEV ("Actively exploited")
+- CVSS severity color badges (Critical/High/Medium/Low)
+- Keyword highlighting/watchlist (e.g. "zero-day", "ransomware", "Fortinet")
+- Bookmark/read-later (localStorage)
+- OPML import/export so feeds are user-editable
+- Generated RSS output of the merged feed
+- Daily digest view
+
+## Design direction
+- Dense, scannable, analyst-friendly (think security console, not blog)
+- [Dark by default | minimal | terminal-style]  <-- CONFIRM
+- Clear visual distinction between categories and severity
+
+## Constraints
+- No tracking, no ads, minimal dependencies
+- Sanitize all feed HTML (XSS risk). Never render raw feed content with innerHTML
+- Respect source terms: show only title and short excerpt, link to the original
+- Accessible (keyboard navigation, contrast)
+
+## Deliverables
+1. Complete working code (all files, with folder structure)
+2. Feed config file (easy to add/remove sources)
+3. Setup and deploy instructions (including the cron/refresh mechanism)
+4. Notes on limitations (CORS, rate limits, NVD API key)

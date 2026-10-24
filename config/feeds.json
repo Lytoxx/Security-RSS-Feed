@@ -1,0 +1,33 @@
+{
+  "settings": {
+    "maxItemsPerFeed": 50,
+    "maxItemAgeDays": 30,
+    "excerptLength": 280,
+    "requestTimeoutMs": 15000,
+    "userAgent": "CyberFeedDashboard/1.0 (personal RSS aggregator)"
+  },
+  "categories": [
+    { "id": "news", "label": "News" },
+    { "id": "vulnerabilities", "label": "Vulnerabilities" },
+    { "id": "advisories", "label": "Advisories" },
+    { "id": "threat-hunting", "label": "Threat Hunting" }
+  ],
+  "feeds": [
+    { "id": "bleepingcomputer", "name": "BleepingComputer", "category": "news", "url": "https://www.bleepingcomputer.com/feed/", "enabled": true },
+    { "id": "thehackernews", "name": "The Hacker News", "category": "news", "url": "https://feeds.feedburner.com/TheHackersNews", "enabled": true },
+    { "id": "krebs", "name": "Krebs on Security", "category": "news", "url": "https://krebsonsecurity.com/feed/", "enabled": true },
+    { "id": "securityweek", "name": "SecurityWeek", "category": "news", "url": "https://feeds.feedburner.com/securityweek", "enabled": true },
+    { "id": "darkreading", "name": "Dark Reading", "category": "news", "url": "https://www.darkreading.com/rss.xml", "enabled": true },
+
+    { "id": "exploitdb", "name": "Exploit-DB", "category": "vulnerabilities", "url": "https://www.exploit-db.com/rss.xml", "enabled": true },
+
+    { "id": "cisa-advisories", "name": "CISA Advisories", "category": "advisories", "url": "https://www.cisa.gov/cybersecurity-advisories/all.xml", "enabled": true },
+    { "id": "sans-isc", "name": "SANS ISC", "category": "advisories", "url": "https://isc.sans.edu/rssfeed.xml", "enabled": true },
+
+    { "id": "dfir-report", "name": "The DFIR Report", "category": "threat-hunting", "url": "https://thedfirreport.com/feed/", "enabled": true },
+    { "id": "talos", "name": "Cisco Talos", "category": "threat-hunting", "url": "https://blog.talosintelligence.com/rss/", "enabled": true },
+    { "id": "unit42", "name": "Unit 42", "category": "threat-hunting", "url": "https://unit42.paloaltonetworks.com/feed/", "enabled": true },
+    { "id": "securelist", "name": "Securelist", "category": "threat-hunting", "url": "https://securelist.com/feed/", "enabled": true },
+    { "id": "project-zero", "name": "Google Project Zero", "category": "threat-hunting", "url": "https://googleprojectzero.blogspot.com/feeds/posts/default", "enabled": true }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "name": "cyber-feed-dashboard",
+  "version": "1.0.0",
+  "description": "Static cybersecurity RSS dashboard: news, CVEs, advisories, threat intel",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "fetch": "node scripts/fetch-feeds.js",
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.11.2"
+  },
+  "devDependencies": {
+    "eslint": "^10.13.0",
+    "prettier": "^3.9.10"
+  }
+}

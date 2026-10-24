@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <title>Cyber Feed Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#items">Skip to results</a>
+
+    <header class="topbar">
+      <h1 class="brand">Cyber Feed</h1>
+      <p class="updated" id="last-updated" aria-live="polite">Loading…</p>
+      <button type="button" id="theme-toggle" class="icon-button" aria-label="Switch to light theme">
+        Theme
+      </button>
+    </header>
+
+    <main>
+      <div id="feed-warnings" class="warnings" role="status" hidden></div>
+
+      <section class="controls" aria-label="Filters">
+        <nav aria-label="Categories">
+          <div id="tabs" class="tabs" role="tablist" aria-label="Feed categories"></div>
+        </nav>
+
+        <div class="filters">
+          <label class="visually-hidden" for="search">Search items</label>
+          <input id="search" type="search" placeholder="Search titles and summaries…" autocomplete="off" />
+
+          <label class="visually-hidden" for="source-filter">Filter by source</label>
+          <select id="source-filter">
+            <option value="">All sources</option>
+          </select>
+        </div>
+
+        <p class="result-count" id="result-count" aria-live="polite"></p>
+      </section>
+
+      <section id="items" class="items" aria-label="Feed items" tabindex="-1"></section>
+    </main>
+
+    <footer class="footer">
+      <p>Titles and short excerpts only. Each item links to its original source.</p>
+    </footer>
+  </body>
+</html>
